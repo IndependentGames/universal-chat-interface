@@ -3,6 +3,7 @@ import ChatMessage from './ProjectFiles/ChatMessage';
 import ChatInput from './ProjectFiles/ChatInput';
 import defaultUserIcon from './Icons/Profile/DefaultProfile_User.png';
 import defaultBotIcon from './Icons/Profile/DefaultProfile_Bot.png';
+import axios from 'axios';
 
 const ChatInterface: React.FC = () => {
   const [messages, setMessages] = useState<Array<{ text: string; sender: string }>>([]);
@@ -20,21 +21,31 @@ const ChatInterface: React.FC = () => {
     setInput(event.target.value);
   };
 
-  const handleSend = (): void => {
+  const handleSend = async () => {
     setMessages((prevMessages) => [
       ...prevMessages,
       { text: input, sender: 'user' },
     ]);
     setInput('');
     setIsTyping(true);
-
-    setTimeout(() => {
+  
+    try {
+      const response = await axios.post('http://localhost:3000/api/send-message', { message: input });
+  
+      // Extract the generated chat message from the API response
+      const generatedMessage = response.data.response;
+  
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: 'Hello, I am your Chatbot.', sender: 'bot' },
+        { text: generatedMessage, sender: 'bot' },
       ]);
-      setIsTyping(false);
-    }, 1000);
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle any error cases here
+      // You can display an error message or handle the error as needed
+    }
+  
+    setIsTyping(false);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>): void => {
