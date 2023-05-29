@@ -30,7 +30,7 @@ const ChatInterface: React.FC = () => {
     setIsTyping(true);
   
     try {
-      const response = await axios.post('http://localhost:3000/api/send-message', {
+      const response = await axios.post('http://192.168.1.81:3000/api/send-message', {
         messages: [
           { role: 'user', content: input },
         ],
