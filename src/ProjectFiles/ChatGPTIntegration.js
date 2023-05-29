@@ -1,4 +1,4 @@
-// Import necessary dependencies
+/*// Import necessary dependencies
 import axios from 'axios';
 
 // Define the ChatGPT API endpoint and API key
@@ -27,4 +27,4 @@ export async function sendMessageToAPI(message) {
     // Handle any error cases here
     // You can return an error message or handle the error as needed
   }
-}
+}*/
