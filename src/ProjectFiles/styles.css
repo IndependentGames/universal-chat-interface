@@ -1,0 +1,75 @@
+.chat-input {
+    width: calc(100% - 20px); /* Subtract padding */
+    padding: 10px;
+    border: none;
+    border-radius: 25px; /* Make input box rounder */
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    font-size: 16px;
+    margin: 10px;
+    background-color: #FFB6C1; /* Match user's message bubble color */
+}
+.input-icons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: white; /* Match the background color of your page */
+}
+.input-icons img {
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
+}
+.chat-message {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+}
+.chat-message.user {
+    justify-content: flex-end;
+}
+.chat-message-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.chat-message-content.user {
+    flex-direction: row-reverse;
+}
+.chat-message-bubble {
+    position: relative;
+    background-color: #ADD8E6;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+.chat-message-bubble.user {
+    background-color: #FFB6C1;
+}
+.chat-message-arrow {
+    width: 0;
+    height: 0;
+    border-top: 10px solid #ADD8E6;
+    border-right: 10px solid transparent;
+    border-left: 10px solid transparent;
+    position: absolute;
+    top: 0;
+    left: -10px;
+}
+.chat-message-arrow.user {
+    border-top: 10px solid #FFB6C1;
+    right: -10px;
+    left: auto;
+}
+.profile-image {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
