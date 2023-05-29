@@ -73,3 +73,60 @@
     margin-right: 10px;
     cursor: pointer;
 }
+
+.username {
+    color: rgb(0, 0, 0);
+    position: absolute;
+    top: 60px;  /* Adjust this value as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    animation: wiggle 1s infinite;
+    -webkit-backface-visibility: inherit;
+    backface-visibility: inherit;
+    transform-style: preserve-3d;
+}
+
+@keyframes wiggle {
+    0% {
+      transform: translateX(-50%) rotate(0deg);
+    }
+    50% {
+      transform: translateX(-50%) rotate(5deg);
+    }
+    100% {
+      transform: translateX(-50%) rotate(0deg);
+    }
+  }
+
+.label-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.label-container:hover .username {
+    opacity: 1;
+}
+
+/* Allows placing custom text before username
+.username::before {
+  content: '- ';
+}
+*/
+
+.chat-message-content:hover .username {
+  visibility: visible;
+}
+
+  
+.profile-image:hover + .username {
+    visibility: visible;
+}
+  
+
+.input-file-hidden {
+    display: none;
+}  

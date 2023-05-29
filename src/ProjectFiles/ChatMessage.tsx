@@ -15,28 +15,35 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
 }) => {
   const isUser = message.sender === 'user';
 
-  return (
-    <div className={`chat-message ${isUser ? 'user' : ''}`}>
-      <div className={`chat-message-content ${isUser ? 'user' : ''}`}>
-        <input
-          type='file'
-          style={{ display: 'none' }}
-          id={message.sender + 'IconUpload'}
-          onChange={(event) => handleIconUpload(event, message.sender)}
-        />
-        <label htmlFor={message.sender + 'IconUpload'}>
-          <img
-            src={isUser ? userIcon : botIcon}
-            alt='Profile'
-            className='profile-image'
-          />
-        </label>
-        <div className={`chat-message-bubble ${isUser ? 'user' : ''}`}>
-          <strong>{message.sender}:</strong> {message.text}
-          <div className={`chat-message-arrow ${isUser ? 'user' : ''}`}></div>
+return (
+  <div className={`chat-message ${isUser ? 'user' : ''}`}>
+    <div className={`chat-message-content ${isUser ? 'user' : ''}`}>
+      <input
+        type='file'
+        id={message.sender + 'IconUpload'}
+        onChange={(event) => handleIconUpload(event, message.sender)}
+        className='input-file-hidden'
+      />
+      <label className="label-container" htmlFor={message.sender + 'IconUpload'}>
+        <div className='username'>
+          {Array.from(message.sender).map((letter, index) => (
+            <span className="username-letter" style={{ '--index': index } as React.CSSProperties} key={index}>
+              {letter}
+            </span>
+          ))}
         </div>
+        <img
+          src={isUser ? userIcon : botIcon}
+          alt='Profile'
+          className='profile-image'
+        />
+      </label>
+      <div className={`chat-message-bubble ${isUser ? 'user' : ''}`}>
+        {message.text}
+        <div className={`chat-message-arrow ${isUser ? 'user' : ''}`}></div>
       </div>
     </div>
+  </div>
   );
 };
 

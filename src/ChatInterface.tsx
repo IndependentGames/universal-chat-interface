@@ -4,20 +4,12 @@ import ChatInput from './ProjectFiles/ChatInput';
 import defaultUserIcon from './Icons/Profile/DefaultProfile_User.png';
 import defaultBotIcon from './Icons/Profile/DefaultProfile_Bot.png';
 
-interface ChatState {
-  messages: Array<{ text: string; sender: string }>;
-  input: string;
-  isTyping: boolean;
-  userIcon: string;
-  botIcon: string;
-}
-
 const ChatInterface: React.FC = () => {
   const [messages, setMessages] = useState<Array<{ text: string; sender: string }>>([]);
   const [input, setInput] = useState<string>('');
   const [isTyping, setIsTyping] = useState<boolean>(false);
-  const [userIcon, setUserIcon] = useState<string>('./Icons/Profile/DefaultProfile_User.png');
-  const [botIcon, setBotIcon] = useState<string>('./Icons/Profile/DefaultProfile_Bot.png');
+  const [userIcon, setUserIcon] = useState<string>(defaultUserIcon);
+  const [botIcon, setBotIcon] = useState<string>(defaultBotIcon);
 
   useEffect(() => {
     setUserIcon(defaultUserIcon);
