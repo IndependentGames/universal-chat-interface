@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ChatMessageProps {
-  message: { text: string; sender: string };
+  message: { role: string; content: string };
   handleIconUpload: (event: any, sender: any) => void;
   userIcon: string;
   botIcon: string;
@@ -13,20 +13,20 @@ const ChatMessage: React.FC<ChatMessageProps> = ({
   userIcon,
   botIcon,
 }) => {
-  const isUser = message.sender === 'user';
+  const isUser = message.role === 'user';
 
 return (
   <div className={`chat-message ${isUser ? 'user' : ''}`}>
     <div className={`chat-message-content ${isUser ? 'user' : ''}`}>
       <input
         type='file'
-        id={message.sender + 'IconUpload'}
-        onChange={(event) => handleIconUpload(event, message.sender)}
+        id={message.role + 'IconUpload'}
+        onChange={(event) => handleIconUpload(event, message.role)}
         className='input-file-hidden'
       />
-      <label className="label-container" htmlFor={message.sender + 'IconUpload'}>
+      <label className="label-container" htmlFor={message.role + 'IconUpload'}>
         <div className='username'>
-          {Array.from(message.sender).map((letter, index) => (
+          {Array.from(message.role).map((letter, index) => (
             <span className="username-letter" style={{ '--index': index } as React.CSSProperties} key={index}>
               {letter}
             </span>
@@ -39,7 +39,7 @@ return (
         />
       </label>
       <div className={`chat-message-bubble ${isUser ? 'user' : ''}`}>
-        {message.text}
+        {message.content}
         <div className={`chat-message-arrow ${isUser ? 'user' : ''}`}></div>
       </div>
     </div>

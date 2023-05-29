@@ -6,7 +6,7 @@ import defaultBotIcon from './Icons/Profile/DefaultProfile_Bot.png';
 import axios from 'axios';
 
 const ChatInterface: React.FC = () => {
-  const [messages, setMessages] = useState<Array<{ text: string; sender: string }>>([]);
+  const [messages, setMessages] = useState<Array<{ role: string; content: string }>>([]);
   const [input, setInput] = useState<string>('');
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [userIcon, setUserIcon] = useState<string>(defaultUserIcon);
@@ -24,23 +24,31 @@ const ChatInterface: React.FC = () => {
   const handleSend = async () => {
     setMessages((prevMessages) => [
       ...prevMessages,
-      { text: input, sender: 'user' },
+      { role: 'user', content: input },
     ]);
     setInput('');
     setIsTyping(true);
   
     try {
-      const response = await axios.post('http://localhost:3000/api/send-message', { message: input });
+      const response = await axios.post('http://localhost:3000/api/send-message', {
+        messages: [
+          { role: 'user', content: input },
+        ],
+      });
   
       // Extract the generated chat message from the API response
       const generatedMessage = response.data.response;
   
       setMessages((prevMessages) => [
         ...prevMessages,
-        { text: generatedMessage, sender: 'bot' },
+        { role: 'assistant', content: generatedMessage },
       ]);
     } catch (error) {
       console.error('Error:', error);
+      console.log('Response:', (error as any).response);
+      console.log('Error Data:', (error as any).response?.data);
+      console.log('Error Status:', (error as any).response?.status);
+      console.log('Error Status Text:', (error as any).response?.statusText);
       // Handle any error cases here
       // You can display an error message or handle the error as needed
     }
